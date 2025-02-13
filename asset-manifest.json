@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/virtual-piano/static/css/main.6eff4350.css",
+    "main.js": "/virtual-piano/static/js/main.3800fbe9.js",
+    "index.html": "/virtual-piano/index.html",
+    "main.6eff4350.css.map": "/virtual-piano/static/css/main.6eff4350.css.map",
+    "main.3800fbe9.js.map": "/virtual-piano/static/js/main.3800fbe9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6eff4350.css",
+    "static/js/main.3800fbe9.js"
+  ]
+}
