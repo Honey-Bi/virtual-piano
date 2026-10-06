@@ -40,5 +40,15 @@
   },
   "devDependencies": {
     "@types/webmidi": "^2.1.0"
+  },
+  "overrides": {
+    "qs": "^6.16.0",
+    "postcss@>=8 <9": "^8.5.29",
+    "minimatch@>=3 <4": "^3.1.5",
+    "serialize-javascript": "^7.1.2",
+    "proxy-addr": "^2.0.8"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
