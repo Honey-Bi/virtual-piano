@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "updates": [
+    {
+      "package-ecosystem": "npm",
+      "directories": [
+        "/"
+      ],
+      "schedule": {
+        "interval": "weekly",
+        "day": "monday",
+        "time": "09:00",
+        "timezone": "Asia/Seoul"
+      },
+      "open-pull-requests-limit": 5,
+      "groups": {
+        "security-updates": {
+          "applies-to": "security-updates",
+          "patterns": [
+            "*"
+          ]
+        },
+        "minor-and-patch": {
+          "applies-to": "version-updates",
+          "patterns": [
+            "*"
+          ],
+          "update-types": [
+            "minor",
+            "patch"
+          ]
+        }
+      }
+    }
+  ]
+}
