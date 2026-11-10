@@ -1,0 +1,49 @@
+name: Dependency checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        directory: ["."]
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run build --if-present
+      - name: Run existing tests and syntax checks
+        run: |
+          node <<'NODE'
+          const { spawnSync } = require('node:child_process');
+          const fs = require('node:fs');
+          const pkg = require('./package.json');
+          const run = (bin, args) => { const r = spawnSync(bin, args, { stdio: 'inherit' }); if (r.error) throw r.error; if (r.status !== 0) process.exit(r.status || 1); };
+          if (pkg.scripts?.test) {
+            run('npm', pkg.scripts.test.includes('react-scripts') ? ['test', '--', '--watchAll=false', '--passWithNoTests'] : ['test']);
+          } else if (fs.existsSync('test')) { run('node', ['--test']); }
+          if (!pkg.scripts?.build) {
+            const scan = dir => { for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+              if (['node_modules', '.git', '.github'].includes(e.name)) continue;
+              const path = dir + '/' + e.name;
+              if (e.isDirectory()) scan(path); else if (e.name.endsWith('.js')) run('node', ['--check', path]);
+            } };
+            scan('.');
+          }
+          NODE
+      - run: npm audit --audit-level=low
