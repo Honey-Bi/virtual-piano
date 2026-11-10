@@ -7,8 +7,8 @@
     "@types/node": "^22.12.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "typescript": "^4.9.5",
     "webmidi": "^3.1.12"
   },
@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@types/webmidi": "^2.1.0",
-    "vite": "^8.3.3",
-    "@vitejs/plugin-react": "^6.1.2",
-    "vitest": "^5.0.3",
+    "vite": "^8.3.6",
+    "@vitejs/plugin-react": "^6.2.1",
+    "vitest": "^5.1.0",
     "jsdom": "^30.1.2"
   },
   "engines": {
